@@ -12,10 +12,19 @@ public class TestController {
     @Autowired
     TestService testService;
 
+    @Autowired
+    TestRepository testRepository;
+
     @GetMapping("/test")
     public String test(){
         log.info("this main thread name [{}]", Thread.currentThread().getName());
         testService.test();
+        return "test";
+    }
+
+    @GetMapping("/find-all")
+    public String findAll(){
+        Iterable<TestEntity> all = testRepository.findAll();
         return "test";
     }
 
