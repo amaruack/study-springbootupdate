@@ -1,1 +1,47 @@
+server:
+  servlet:
+    context-path: /test
 
+logging:
+  group:
+    test :
+      - org.springframework.data
+      - org.hibernate
+      - javax.persistence
+  level:
+    test: trace
+    sql: debug
+#    org:
+#      hibernate:
+#        type:
+#          descriptor:
+#            sql:
+#              BasicBinder: TRACE
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+test:
+  key1: aaa
+  key2: 24
+  key3: 24MB
+
+info:
+  data:
+    today: "2023/02/02"
+
+# 지연 로딩을 할꺼냐 ?
+# Fail - Fast 에 반하는 전략
+spring:
+  main:
+    lazy-initialization: true # bean 들 나중 생성
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: lazy # jpa repository 들을 호출 시 생성
+  jmx:
+    enabled: true  # jmx 실행 여부 , default false
