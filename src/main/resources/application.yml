@@ -1,6 +1,7 @@
 server:
   servlet:
     context-path: /test
+  shutdown: graceful
 
 logging:
   group:
@@ -18,25 +19,39 @@ logging:
 #            sql:
 #              BasicBinder: TRACE
 
-
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: always
+      group:
+        server.include:
+          - ping
+          - db
+        server.show-detail: always
+      probes:
+        enabled: true
 
 test:
   key1: aaa
   key2: 24
-  key3: 24MB
+  data-size: 24MB
 
 info:
   data:
     today: "2023/02/02"
 
+
+spring:
+#  profiles:
+#    active: devel
+  config:
+    import: configtree:config/
 # 지연 로딩을 할꺼냐 ?
 # Fail - Fast 에 반하는 전략
-spring:
   main:
     lazy-initialization: true # bean 들 나중 생성
   data:
@@ -45,3 +60,14 @@ spring:
         bootstrap-mode: lazy # jpa repository 들을 호출 시 생성
   jmx:
     enabled: true  # jmx 실행 여부 , default false
+  lifecycle:
+    timeout-per-shutdown-phase: 5s
+
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - devel
+test:
+  data-size: 50MB

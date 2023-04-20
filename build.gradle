@@ -6,7 +6,8 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+//name = 'rino-image-test'
+//sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -20,6 +21,7 @@ repositories {
 
 dependencies {
     implementation ('org.springframework.boot:spring-boot-starter-web')
+    implementation ('org.springframework.boot:spring-boot-starter-actuator')
     implementation ('org.springframework.boot:spring-boot-starter-data-jdbc')
     implementation ('org.springframework.boot:spring-boot-properties-migrator')
     implementation ('org.springframework.boot:spring-boot-starter-actuator')
@@ -39,3 +41,14 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+//bootBuildImage {
+//    imageName = docker_id + "/${project.name}"
+//    publish = true
+//    docker {
+//        publishRegistry {
+//            username = docker_id
+//            password = docker_pw
+//        }
+//    }
+//}
